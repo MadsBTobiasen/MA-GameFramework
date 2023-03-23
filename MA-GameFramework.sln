@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32819.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MA-GameFramework", "MA-GameFramework.csproj", "{470E82D7-B407-40FF-A575-65F52644142E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameFramework-Tester", "..\GameFramework-Tester\GameFramework-Tester.csproj", "{923E19B4-398A-4A6B-9615-12C832DC96F0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{470E82D7-B407-40FF-A575-65F52644142E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{470E82D7-B407-40FF-A575-65F52644142E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{470E82D7-B407-40FF-A575-65F52644142E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{470E82D7-B407-40FF-A575-65F52644142E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{923E19B4-398A-4A6B-9615-12C832DC96F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{923E19B4-398A-4A6B-9615-12C832DC96F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{923E19B4-398A-4A6B-9615-12C832DC96F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{923E19B4-398A-4A6B-9615-12C832DC96F0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FC2DF6B2-CF99-4120-8EA9-F73FEE84A794}
+	EndGlobalSection
+EndGlobal
