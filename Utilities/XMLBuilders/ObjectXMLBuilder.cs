@@ -61,6 +61,38 @@ namespace MA_GameFramework.Utilities.XMLBuilders
         private static T BuildObject<T>(XmlNode node) where T : new()
         {
 
+            //T obj = new T();
+            //Type oType = typeof(T);
+
+            //foreach(PropertyInfo prop in oType.GetProperties())
+            //{
+
+            //    Type pType = prop.PropertyType;
+
+            //    /**
+            //     * Handlers if pType is a primitive, or a string.
+            //     */
+            //    if(pType.IsPrimitive || pType == typeof(string))
+            //    {
+
+            //    }
+            //    /**
+            //     * Handlers if pType is a collection.
+            //     */
+            //    else if(pType.IsGenericType && pType.GetGenericTypeDefinition() == typeof(IEnumerable))
+            //    {
+
+            //    }
+            //    /**
+            //     *  Handlers if pType is a class.
+            //     */
+            //    else
+            //    {
+            //       //Recursive call.
+            //    }
+
+            //}
+
             if (!_serializers.ContainsKey(typeof(T).Name))
                 _serializers.Add(typeof(T).Name, new XmlSerializer(typeof(T), new XmlRootAttribute(typeof(T).Name)));
 

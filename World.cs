@@ -60,7 +60,7 @@ namespace MA_GameFramework
         #region Methods
         public override string ToString()
         {
-            return $"World: ({MaxX}x{MaxY})";
+            return $"World: ({MaxX}x{MaxY}) {Creatures.Length}-Creatures {WorldObjects.Length}-Objects {ItemObjects.Length}-Items";
         }
         #endregion
 

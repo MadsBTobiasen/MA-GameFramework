@@ -28,7 +28,7 @@ namespace MA_GameFramework.Utilities
             #region Grabbing Configuration Values.
             
             BuildDimensions(xml, builder);
-            ItemObjectXMLBuilder.BuildItemObjects(xml?.DocumentElement?.SelectSingleNode("ItemObjects"), builder);
+            //ItemObjectXMLBuilder.BuildItemObjects(xml?.DocumentElement?.SelectSingleNode("ItemObjects"), builder);
 
             #endregion
 

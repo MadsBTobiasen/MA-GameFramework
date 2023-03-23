@@ -25,19 +25,19 @@ namespace MA_GameFramework.Objects.WorldObjects
         /// <summary>
         /// Name of the Creature.
         /// </summary>
-        public string Name { get; private set; }
+        public string Name { get; set; }
         /// <summary>
         /// Hitpoints of the Creature.
         /// </summary>
-        public int Hitpoints { get; private set; }
+        public int Hitpoints { get; set; }
         /// <summary>
         /// The weapon the Creature is using.
         /// </summary>
-        public AttackItem Weapon { get; private set; }
+        public AttackItem Weapon { get; set; }
         /// <summary>
         /// The shield the Creature is using.
         /// </summary>
-        public DefenceItem Shield { get; private set; }
+        public DefenceItem Shield { get; set; }
         /// <summary>
         /// Boolean indicating if the creature is dead or alive.
         /// </summary>
@@ -77,6 +77,11 @@ namespace MA_GameFramework.Objects.WorldObjects
             Shield = dItem;
 
         }
+        
+        /// <summary>
+        /// Default Constructor to allow for reflection.
+        /// </summary>
+        public Creature() { }
         #endregion
 
         #region Methods
@@ -100,9 +105,18 @@ namespace MA_GameFramework.Objects.WorldObjects
             return IsAlive;
         }
 
+        /// <summary>
+        /// Function that returns the current position object.
+        /// </summary>
+        /// <returns>Instance of Position.</returns>
         public Position GetPosition()
         {
             return _position;
+        }
+
+        public override string ToString()
+        {
+            return $"Creature: ({Id}) {Name} {Hitpoints} | {Weapon} | {Shield}";
         }
         #endregion
 

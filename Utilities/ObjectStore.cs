@@ -17,7 +17,14 @@ namespace MA_GameFramework.Utilities
         #endregion
 
         #region Properties
+        /// <summary>
+        /// List of Items in the Store.
+        /// </summary>
         public List<T> Items => new List<T>(_store.Values);
+        /// <summary>
+        /// Length of the Store.
+        /// </summary>
+        public int Length => _store.Count;
         #endregion
 
         #region Constructors
