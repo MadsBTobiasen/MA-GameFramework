@@ -5,17 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace MA_GameFramework.Objects.ItemObjects
+namespace MA_GameFramework.Objects.Items
 {
-    public class AttackItem : IItemObject
+    public class AttackItem : Item
     {
 
-        #region Properties
-        public int Id { get; set; }
+        #region Static Fields
         /// <summary>
-        /// Name of the weapon.
+        /// DefaultWeapon.
         /// </summary>
-        public string Name { get; set; }
+        public static AttackItem Default = new AttackItem() { Id = 9001, Name = "Unarmed", AttackDamage = 0, Range = 1 };
+        #endregion
+
+        #region Properties
         /// <summary>
         /// AttackDamage of the Weapon.
         /// </summary>
@@ -28,25 +30,10 @@ namespace MA_GameFramework.Objects.ItemObjects
 
         #region Constructor
         /// <summary>
-        /// Create a new instance of AttackItem.
-        /// </summary>
-        /// <param name="damage">How much damage the weapon will deal.</param>
-        /// <param name="name">The name of the weapon.</param>
-        /// <param name="range">THe range of the weapon.</param>
-        public AttackItem(string name, int damage, int range)
-        {
-            Name = name;
-            AttackDamage = damage;
-            Range = range;
-        }
-
-        /// <summary>
         /// Default Constructor to allow for reflection.
         /// </summary>
-        public AttackItem()
-        {
-            Name = "";
-        }
+        public AttackItem() : base()
+        { }
         #endregion
 
         #region Methods

@@ -1,4 +1,4 @@
-﻿using MA_GameFramework.Objects.Items;
+﻿using MA_GameFramework.Objects.Entities;
 using MA_GameFramework.Utilities.XmlBuilders;
 using System;
 using System.Collections.Generic;
@@ -10,19 +10,19 @@ namespace MA_GameFramework.Utilities.XMLBuilders
 {
 
     /// <summary>
-    /// XmlBuilder for the Item-type.
+    /// XmlBuilder for the Entity-type.
     /// </summary>
     /// <typeparam name="TBase">Type of object, where the serialized objects, are nesten within.</typeparam>
-    public static class ItemXmlBuilder<TBase> where TBase : Item
+    public static class EntityXmlBuilder<TBase> where TBase : Entity
     {
 
         #region Builders
         /// <summary>
-        /// Function that builds the objects of type T, with no predefined parentElement.
-        /// ParentElement gets assigned to T's name in plural form.
+        /// Function that builds object from an .XML file, defined by the path.
         /// </summary>
-        /// <param name="path">Path to .XML.</param>
-        /// <returns>IEnumerable of objects.</returns>
+        /// <typeparam name="T">Type of object to deserialize. The element name must match the type.</typeparam>
+        /// <param name="path">Path to the .xml-file.</param>
+        /// <returns>IEnumerable of T.</returns>
         public static IEnumerable<T> Build<T>(string path) where T : TBase, new()
         {
             return ObjectXmlBuilder<TBase>.Build<T>(path);

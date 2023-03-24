@@ -1,6 +1,5 @@
-﻿using MA_GameFramework.Objects;
-using MA_GameFramework.Objects.ItemObjects;
-using MA_GameFramework.Objects.WorldObjects;
+﻿using MA_GameFramework.Objects.Entities;
+using MA_GameFramework.Objects.Items;
 using MA_GameFramework.Utilities;
 using System;
 using System.Collections.Generic;
@@ -33,7 +32,7 @@ namespace MA_GameFramework
         /// <summary>
         /// ItemObjects available in the Game.
         /// </summary>
-        public ObjectStore<IItemObject> ItemObjects { get; private set; }
+        public ObjectStore<IItem> ItemObjects { get; private set; }
         #endregion
 
         #region Constructor
@@ -44,7 +43,7 @@ namespace MA_GameFramework
         /// <param name="maxY">MaxY of the World.</param>
         /// <param name="creatures">Creatures present in the World.</param>
         /// <param name="worldObjects">WorldObject present in the World.</param>
-        public World(int maxX, int maxY, ObjectStore<Creature> creatures, ObjectStore<WorldObject> worldObjects, ObjectStore<IItemObject> itemObjects)
+        public World(int maxX, int maxY, ObjectStore<Creature> creatures, ObjectStore<WorldObject> worldObjects, ObjectStore<IItem> itemObjects)
         {
         
             MaxX = maxX;

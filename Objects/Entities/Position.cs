@@ -1,4 +1,4 @@
-﻿namespace MA_GameFramework.Objects.WorldObjects
+﻿namespace MA_GameFramework.Objects.Entities
 {
     /// <summary>
     /// Class that can hold coordinates for the game.
@@ -18,11 +18,21 @@
         #endregion
 
         #region Constructor
+        /// <summary>
+        /// Constructor for the Position.
+        /// </summary>
+        /// <param name="x">Sets the start-x.</param>
+        /// <param name="y">Sets the start-y.</param>
         public Position(int x, int y)
         {
             X = x;
             Y = y;
         }
+        /// <summary>
+        /// Default Constructor to allow for reflection.
+        /// </summary>
+        public Position()
+        { }
         #endregion
 
     }
