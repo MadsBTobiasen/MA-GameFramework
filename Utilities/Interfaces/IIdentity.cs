@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MA_GameFramework.Utilities
+namespace MA_GameFramework.Utilities.Interfaces
 {
     public interface IIdentity<T>
     {

@@ -1,15 +1,16 @@
 ﻿using MA_GameFramework.Objects.Entities;
 using MA_GameFramework.Objects.Items;
-using MA_GameFramework.Utilities.XmlBuilders;
 using MA_GameFramework.Utilities.XMLBuilders;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MA_GameFramework.Utilities
 {
+
     /// <summary>
     /// WorldBuilder class, where objects and creatures, can be added, before being returned.
     /// </summary>
@@ -19,7 +20,7 @@ namespace MA_GameFramework.Utilities
         #region Fields
         private List<Creature> _creatures;
         private List<WorldObject> _worldObjects;
-        private List<IItem> _items;
+        private List<Item> _items;
         private int _worldSizeX, _worldSizeY;
         #endregion
 
@@ -31,7 +32,7 @@ namespace MA_GameFramework.Utilities
         {
             _creatures = new List<Creature>();
             _worldObjects = new List<WorldObject>();
-            _items = new List<IItem>();
+            _items = new List<Item>();
         }
         #endregion
 
@@ -41,10 +42,11 @@ namespace MA_GameFramework.Utilities
         /// </summary>
         /// <param name="maxX">MaxX of the world.</param>
         /// <param name="maxY">MaxY of the world.</param>
-        public void SetDimensions(int maxX, int maxY)
+        public WorldBuilder SetDimensions(int maxX, int maxY)
         {
             _worldSizeX = maxX;
             _worldSizeY = maxY;
+            return this;
         }
 
         #region Creature Adders
@@ -52,9 +54,10 @@ namespace MA_GameFramework.Utilities
         /// Function that adds the Creature to the World.
         /// </summary>
         /// <param name="creature">Creature to add.</param>
-        public void AddCreatures(params Creature[] creatures)
+        public WorldBuilder AddCreatures(params Creature[] creatures)
         {
             _creatures.AddRange(creatures);
+            return this;
         }
 
         /// <summary>
@@ -62,15 +65,22 @@ namespace MA_GameFramework.Utilities
         /// from a .XML file, given by the path.
         /// </summary>
         /// <param name="path">Path to the creatures .XML.</param>
-        public void AddCreatureFromXml(string path)
+        public WorldBuilder AddCreatureFromXml(string path)
         {
-            _creatures.AddRange(EntityXmlBuilder<Creature>.Build<Creature>(path));
+            _creatures.AddRange(CreatureXmlBuilder<Creature>.Build<Creature>(path));
+            return this;
         }
 
-        //ADD COMMENT
-        public void AddCreatureFromXml<T>(string path) where T : Creature, new()
+        /// <summary>
+        /// Functions that adds Creatures to the World,
+        /// from a .XML file, given by the path, and a dervied type of Creature.
+        /// </summary>
+        /// <typeparam name="T">Derived type of Creatures.</typeparam>
+        /// <param name="path">Path to the object.</param>
+        public WorldBuilder AddCreatureFromXml<T>(string path) where T : Creature, new()
         {
-            _creatures.AddRange(EntityXmlBuilder<Creature>.Build<T>(path));
+            _creatures.AddRange(CreatureXmlBuilder<Creature>.Build<T>(path));
+            return this;
         }
         #endregion
 
@@ -79,9 +89,10 @@ namespace MA_GameFramework.Utilities
         /// Function that adds the WorldObject to the World.
         /// </summary>
         /// <param name="worldObject">World to add.</param>
-        public void AddWorldObjects(params WorldObject[] worldObjects)
+        public WorldBuilder AddWorldObjects(params WorldObject[] worldObjects)
         {
             _worldObjects.AddRange(worldObjects);
+            return this;
         }
 
         /// <summary>
@@ -89,15 +100,22 @@ namespace MA_GameFramework.Utilities
         /// from a .XML file, given by the path.
         /// </summary>
         /// <param name="path">Path to the worldObjects .XML.</param>
-        public void AddWorldObjectsFromXml(string path)
+        public WorldBuilder AddWorldObjectsFromXml(string path)
         {
-            _worldObjects.AddRange(EntityXmlBuilder<WorldObject>.Build<WorldObject>(path));
+            _worldObjects.AddRange(WorldObjectXmlBuilder<WorldObject>.Build<WorldObject>(path));
+            return this;
         }
 
-        // ADD COMMENT
-        public void AddWorldObjectsFromXml<T>(string path) where T : WorldObject, new()
+        /// <summary>
+        /// Functions that adds WorldObjects to the World,
+        /// from a .XML file, given by the path, and a dervied type of WorldObject.
+        /// </summary>
+        /// <typeparam name="T">Derived type of WorldObject.</typeparam>
+        /// <param name="path">Path to the object.</param>
+        public WorldBuilder AddWorldObjectsFromXml<T>(string path) where T : WorldObject, new()
         {
-            _worldObjects.AddRange(EntityXmlBuilder<WorldObject>.Build<T>(path));
+            _worldObjects.AddRange(WorldObjectXmlBuilder<WorldObject>.Build<T>(path));
+            return this;
         }
         #endregion
 
@@ -105,9 +123,10 @@ namespace MA_GameFramework.Utilities
         /// <summary>
         /// Function that adds the Items to the World.
         /// </summary>
-        public void AddItems(params IItem[] items)
+        public WorldBuilder AddItems(params Item[] items)
         {
             _items.AddRange(items);
+            return this;
         }
 
         /// <summary>
@@ -115,9 +134,10 @@ namespace MA_GameFramework.Utilities
         /// from a .XML file, given by the path.
         /// </summary>
         /// <param name="path">Path to the items .XML.</param>
-        public void AddItemsFromXml<T>(string path) where T : Item, new()
+        public WorldBuilder AddItemsFromXml<T>(string path) where T : Item, new()
         {
             _items.AddRange(ItemXmlBuilder<Item>.Build<T>(path));
+            return this;
         }
         #endregion
 
@@ -130,15 +150,24 @@ namespace MA_GameFramework.Utilities
 
             ObjectStore<Creature> creatureStore = new ObjectStore<Creature>();
             creatureStore.Add(_creatures.OrderByDescending(c => c.Id));
+            creatureStore.Items.ForEach(c => c.Validate());
+            TracerListeners.TS.TraceEvent(TraceEventType.Information, 999, $"Created & Validated {creatureStore.Length}-creatures.");
 
             ObjectStore<WorldObject> worldObjectsStore = new ObjectStore<WorldObject>();
             worldObjectsStore.Add(_worldObjects.OrderByDescending(w => w.Id));
+            worldObjectsStore.Items.ForEach(w => w.Validate());
+            TracerListeners.TS.TraceEvent(TraceEventType.Information, 999, $"Created & Validated {worldObjectsStore.Length}-creatures.");
 
-            ObjectStore<IItem> itemsStore = new ObjectStore<IItem>();
+            ObjectStore<Item> itemsStore = new ObjectStore<Item>();
             itemsStore.Add(_items.OrderByDescending(i => i.Id));
+            itemsStore.Items.ForEach(i => i.Validate());
+            TracerListeners.TS.TraceEvent(TraceEventType.Information, 999, $"Created & Validated {itemsStore.Length}-creatures.");
 
-            return new World(_worldSizeX, _worldSizeY, creatureStore, worldObjectsStore, itemsStore);
-        
+            World world = new World(_worldSizeX, _worldSizeY, creatureStore, worldObjectsStore, itemsStore);
+            TracerListeners.TS.TraceEvent(TraceEventType.Information, 999, $"Initialized World: ({world}).");
+
+            return world;
+
         }
         #endregion
 

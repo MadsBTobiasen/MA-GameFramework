@@ -1,4 +1,4 @@
-﻿using MA_GameFramework.Utilities;
+﻿using MA_GameFramework.Utilities.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

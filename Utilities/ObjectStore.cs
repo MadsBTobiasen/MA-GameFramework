@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MA_GameFramework.Utilities.Interfaces;
 
 namespace MA_GameFramework.Utilities
 {
     public class ObjectStore<T>
-        where T : IIdentity<int>
+        where T : IIdentity<int>, IValidate
     {
 
         #region Fields

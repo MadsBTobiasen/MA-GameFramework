@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MA_GameFramework.Utilities.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace MA_GameFramework.Objects.Entities
     /// <summary>
     /// Class that defines an object in the world space.
     /// </summary>
-    public class WorldObject : Entity
+    public class WorldObject : Entity, IValidate
     {
 
         #region Properties
@@ -31,7 +32,10 @@ namespace MA_GameFramework.Objects.Entities
         #endregion
 
         #region Methods
-
+        public override void Validate()
+        {
+            base.Validate();
+        }
         #endregion
 
     }

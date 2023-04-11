@@ -32,7 +32,7 @@ namespace MA_GameFramework
         /// <summary>
         /// ItemObjects available in the Game.
         /// </summary>
-        public ObjectStore<IItem> ItemObjects { get; private set; }
+        public ObjectStore<Item> ItemObjects { get; private set; }
         #endregion
 
         #region Constructor
@@ -43,7 +43,7 @@ namespace MA_GameFramework
         /// <param name="maxY">MaxY of the World.</param>
         /// <param name="creatures">Creatures present in the World.</param>
         /// <param name="worldObjects">WorldObject present in the World.</param>
-        public World(int maxX, int maxY, ObjectStore<Creature> creatures, ObjectStore<WorldObject> worldObjects, ObjectStore<IItem> itemObjects)
+        public World(int maxX, int maxY, ObjectStore<Creature> creatures, ObjectStore<WorldObject> worldObjects, ObjectStore<Item> itemObjects)
         {
         
             MaxX = maxX;

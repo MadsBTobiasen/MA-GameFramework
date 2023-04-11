@@ -1,4 +1,4 @@
-﻿using MA_GameFramework.Objects.Items;
+﻿using MA_GameFramework.Objects.Entities;
 using MA_GameFramework.Utilities.XmlBuilders;
 using System;
 using System.Collections.Generic;
@@ -8,12 +8,11 @@ using System.Threading.Tasks;
 
 namespace MA_GameFramework.Utilities.XMLBuilders
 {
-
     /// <summary>
-    /// XmlBuilder for the Item-type.
+    /// XmlBuilder that looks in a given .XML file for a <creatures>-tag, and deserializes it.
     /// </summary>
-    /// <typeparam name="TBase">Type of object, where the serialized objects, are nesten within.</typeparam>
-    public static class ItemXmlBuilder<TBase> where TBase : Item
+    /// <typeparam name="TBase">Generic type, derived from Creature.</typeparam>
+    public static class CreatureXmlBuilder<TBase> where TBase : Creature
     {
 
         #region Builders
@@ -42,5 +41,4 @@ namespace MA_GameFramework.Utilities.XMLBuilders
         #endregion
 
     }
-
 }
