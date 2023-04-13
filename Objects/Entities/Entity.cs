@@ -18,7 +18,7 @@ namespace MA_GameFramework.Objects.Entities
         #region Properties
         public int Id { get; set; }
         public string Name { get; set; }
-        public Position Position { get { _position ??= new Position(0, 0); ; return _position; } set { _position = value; } }
+        public Position Position { get { _position ??= new Position(0, 0); return _position; } set { _position = value; } }
         #endregion
 
         #region Constructor

@@ -16,18 +16,19 @@ namespace MA_GameFramework
     {
 
         #region Fields
-        private World _world;
         private InputController<T> _inputController;
+        #endregion
+
+        #region Properties
+        public World World { get; private set; }
         #endregion
 
         #region Constructor
         public Game(World world, InputController<T> inputController)
         {
-            _world = world;
+            World = world;
             _inputController = inputController;
         }
-
-        public Game() { }
         #endregion
 
         #region Methods
@@ -42,6 +43,8 @@ namespace MA_GameFramework
                 return;
 
             _inputController.HandleInput(input.Value);
+
+            World.Update();
 
         }
         #endregion

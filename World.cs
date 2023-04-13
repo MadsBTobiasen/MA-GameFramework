@@ -33,6 +33,10 @@ namespace MA_GameFramework
         /// ItemObjects available in the Game.
         /// </summary>
         public ObjectStore<Item> ItemObjects { get; private set; }
+        /// <summary>
+        /// WorldMatrix for holding entities in the World.
+        /// </summary>
+        public WorldMatrix WorldMatrix { get; private set; }
         #endregion
 
         #region Constructor
@@ -51,12 +55,23 @@ namespace MA_GameFramework
             Creatures = creatures;
             WorldObjects = worldObjects;
             ItemObjects = itemObjects;
-      
+            WorldMatrix = new WorldMatrix(MaxX, MaxY);
+            WorldMatrix.Reset();
+
         }
-        public World() { }
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Calls Update on the World, to reflect changes in position.
+        /// </summary>
+        public void Update()
+        {
+            WorldMatrix.Reset();
+            Creatures.Items.ForEach(c => WorldMatrix.SetPosition(c));
+            WorldObjects.Items.ForEach(w => WorldMatrix.SetPosition(w));
+        }
+
         public override string ToString()
         {
             return $"World: ({MaxX}x{MaxY}) {Creatures.Length}-Creatures {WorldObjects.Length}-Objects {ItemObjects.Length}-Items";

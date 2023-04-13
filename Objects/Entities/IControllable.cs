@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MA_GameFramework.Objects.Entities.States;
+using MA_GameFramework.Objects.Entities.States.StateFacing;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,6 +32,10 @@ namespace MA_GameFramework.Objects.Entities
         /// ConsoleKey for moving forward.
         /// </summary>
         public ConsoleKey TurnLeft { get; }
+        /// <summary>
+        /// State for determing the direction.
+        /// </summary>
+        public IState<Moves, bool> StateFacing { get; }
         /// <summary>
         /// Returns a List of Keys used by the object.
         /// </summary>

@@ -62,7 +62,7 @@ namespace MA_GameFramework.Utilities
         /// <returns></returns>
         public Game<TControl> Build()
         {
-            return new Game<TControl>( WorldBuilder.Build(), _inputController );
+            return new Game<TControl>( WorldBuilder.Build(true), _inputController );
         }
         #endregion
 

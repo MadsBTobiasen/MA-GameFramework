@@ -144,13 +144,15 @@ namespace MA_GameFramework.Utilities
         /// <summary>
         /// Function that creates the World, and returns it.
         /// </summary>
+        /// <param name="randomizePositions">Randomize positions of objects, where positions is 0:0.</param>
         /// <returns>Instance of World.</returns>
-        public World Build()
+        public World Build(bool randomizePositions)
         {
 
             ObjectStore<Creature> creatureStore = new ObjectStore<Creature>();
             creatureStore.Add(_creatures.OrderByDescending(c => c.Id));
             creatureStore.Items.ForEach(c => c.Validate());
+            creatureStore.Items.ForEach(c => c.Position.SetBoundary(_worldSizeX, _worldSizeY));
             TracerListeners.TS.TraceEvent(TraceEventType.Information, 999, $"Created & Validated {creatureStore.Length}-creatures.");
 
             ObjectStore<WorldObject> worldObjectsStore = new ObjectStore<WorldObject>();
@@ -162,6 +164,19 @@ namespace MA_GameFramework.Utilities
             itemsStore.Add(_items.OrderByDescending(i => i.Id));
             itemsStore.Items.ForEach(i => i.Validate());
             TracerListeners.TS.TraceEvent(TraceEventType.Information, 999, $"Created & Validated {itemsStore.Length}-creatures.");
+
+            if(randomizePositions)
+            {
+                TracerListeners.TS.TraceEvent(TraceEventType.Information, 999, $"Radomized Positions of Entities.");
+                creatureStore.Items.ForEach(c =>
+                {
+
+                    bool isControllable = c.GetType().GetInterfaces().ToList().Exists(type => type.Name == typeof(IControllable).Name);
+
+                    if(c.Position.X + c.Position.Y <= 0 && !isControllable)
+                        c.Position = Position.GetRandom(_worldSizeX, _worldSizeY);
+                });
+            }
 
             World world = new World(_worldSizeX, _worldSizeY, creatureStore, worldObjectsStore, itemsStore);
             TracerListeners.TS.TraceEvent(TraceEventType.Information, 999, $"Initialized World: ({world}).");

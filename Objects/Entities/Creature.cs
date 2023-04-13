@@ -80,7 +80,7 @@ namespace MA_GameFramework.Objects.Entities
 
         public override string ToString()
         {
-            return $"Creature: ({Id}) {Name} {Hitpoints} | {Weapon} | {Shield}";
+            return $"Creature: ({Id}) {Name} {Hitpoints} | {Position} | {Weapon} | {Shield}";
         }
         #endregion
 
